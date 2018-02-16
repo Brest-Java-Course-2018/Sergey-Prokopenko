@@ -9,7 +9,8 @@ import static org.junit.Assert.*;
 public class DBUtilsTest {
 
     @org.junit.Test
-    public void getConnection() throws SQLException, ClassNotFoundException {
+    public void getConnection() throws SQLException, ClassNotFoundException
+    {
         DBUtils dbUtils = new DBUtils();
         Assert.assertNotNull(dbUtils.getConnection());
     }
