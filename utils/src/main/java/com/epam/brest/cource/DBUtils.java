@@ -8,6 +8,7 @@ public class DBUtils
     public Connection getConnection() throws ClassNotFoundException, SQLException
     {
         System.out.println("Connect to db.");
+
         String databaseURL = "jdbc:h2:mem:test_db;MODE=MYSQL;DB_CLOSE_DELAY=-1";
         Class.forName("org.h2.Driver");
         Connection connection =
@@ -49,7 +50,7 @@ public class DBUtils
     {
         System.out.println(String.format("Users:"));
 
-        String getRecords = "SELECT user_id, login, description FROM app_user ORDER BY user_id";
+        String getRecords = "SELECT user_id, login, description FROM app_user";
 
         Statement statement= connection.createStatement();
         ResultSet resultSet = statement.executeQuery(getRecords);
