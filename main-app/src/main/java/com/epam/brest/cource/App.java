@@ -14,6 +14,9 @@ public class App
         dbUtils.addUser(connection, "admin", "admin", "User admin");
         dbUtils.addUser(connection, "admin1", "admin3", "User admin54");
         dbUtils.addUser(connection, "admin2", "admin4", "User admin23");
+        dbUtils.addUser(connection, "user", "user", "User user");
+        dbUtils.getUsers(connection);
+        dbUtils.removeUser(connection, 2);
         dbUtils.getUsers(connection);
     }
 }
