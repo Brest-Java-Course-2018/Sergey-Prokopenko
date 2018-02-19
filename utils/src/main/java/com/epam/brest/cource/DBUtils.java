@@ -31,6 +31,7 @@ public class DBUtils {
         System.out.println(String.format("Add user: %s", login));
         String newUser = "INSERT INTO app_user (login, password, description) VALUES (?,?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(newUser);
+
         preparedStatement.setString(1, login);
         preparedStatement.setString(2, password);
         preparedStatement.setString(3, description);

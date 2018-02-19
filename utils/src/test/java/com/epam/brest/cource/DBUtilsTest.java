@@ -22,7 +22,9 @@ public class DBUtilsTest {
         Connection connection = dbUtils.getConnection();
 
         dbUtils.createUserTable(connection);
+
         Assert.assertEquals(dbUtils.addUser(connection, "testAdmin", "testPassword","testTest"),1);
+
         Assert.assertEquals(dbUtils.addUser(connection, "", "",""),0);
 
     }
