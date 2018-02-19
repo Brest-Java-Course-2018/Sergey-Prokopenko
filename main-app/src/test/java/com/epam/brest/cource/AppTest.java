@@ -21,13 +21,9 @@ public class AppTest extends TestCase
     }
 
 
-    public void testApp() throws SQLException, ClassNotFoundException {
-/*
-        DBUtils dbUtils = new DBUtils();
-        Connection connection = dbUtils.getConnection();
-        dbUtils.addUser(connection, "test1", "test1", "test1");
+    public void testApp() throws SQLException, ClassNotFoundException
+    {
 
-        assertEquals(1, 1);*/
     }
 
 }
