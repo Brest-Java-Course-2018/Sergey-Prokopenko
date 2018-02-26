@@ -28,6 +28,4 @@ public class DBUtilsTest {
         Assert.assertEquals(dbUtils.addUser(connection, "", "",""),0);
 
     }
-
-
 }

@@ -3,11 +3,10 @@ package com.epam.brest.cource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class App
-{
-    public static void main( String[] args ) throws SQLException, ClassNotFoundException
-    {
-        System.out.println( "Hello World!" );
+public class App {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+
+        System.out.println("Hello World!");
         DBUtils dbUtils = new DBUtils();
         Connection connection = dbUtils.getConnection();
         dbUtils.createUserTable(connection);
