@@ -34,4 +34,47 @@ public class DepartmentDaoImplTest {
         Assert.assertTrue(department.getDepartmentName().equals("Distribution"));
         Assert.assertTrue(department.getDescription().equals("Distribution Department"));
     }
+
+    @Test
+    public void addDepartment() {
+        Department department = new Department();
+        department.setDepartmentName("DepartmentNameTest");
+        department.setDescription("DepartmentDescriptionTest");
+        departmentDao.addDepartment(department);
+        int i = departmentDao.getDepartments().size();
+        Assert.assertNotNull(department);
+        Assert.assertEquals("DepartmentNameTest", department.getDepartmentName());
+        Assert.assertEquals("DepartmentDescriptionTest", department.getDescription());
+
+        Assert.assertTrue(department.getDepartmentName().equals("DepartmentNameTest"));
+        Assert.assertTrue(department.getDescription().equals("DepartmentDescriptionTest"));
+    }
+
+    @Test
+    public void updateDepartment() {
+        Department department = new Department();
+        department.setDepartmentName("DepartmentNameTest");
+        department.setDescription("DepartmentDescriptionTest");
+        departmentDao.addDepartment(department);
+
+        department.setDepartmentName("Updated name");
+        department.setDescription("Updated description");
+        departmentDao.updateDepartment(department);
+
+        Assert.assertEquals("Updated name", department.getDepartmentName());
+        Assert.assertEquals("Updated description", department.getDescription());
+    }
+
+    @Test
+    public void deleteDepartmentById() {
+
+        Department department = new Department();
+
+        department.setDepartmentId(55);
+        department.setDepartmentName("Delete department");
+        department.setDescription("Delete department descr");
+        departmentDao.addDepartment(department);
+        departmentDao.deleteDepartmentById(55);
+        department = departmentDao.getDepartmentById(55);
+    }
 }
