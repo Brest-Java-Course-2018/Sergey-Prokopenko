@@ -69,12 +69,11 @@ public class DepartmentDaoImplTest {
     public void deleteDepartmentById() {
 
         Department department = new Department();
-
         department.setDepartmentId(55);
         department.setDepartmentName("Delete department");
         department.setDescription("Delete department descr");
         departmentDao.addDepartment(department);
         departmentDao.deleteDepartmentById(55);
-        department = departmentDao.getDepartmentById(55);
+        Assert.assertEquals(null, departmentDao.getDepartmentById(55));
     }
 }
