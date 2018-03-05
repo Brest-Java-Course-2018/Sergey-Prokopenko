@@ -7,8 +7,18 @@ package com.epam.brest.course.model;
 public class Department {
 
     private Integer departmentId;
+
     private String departmentName;
+
     private String description;
+
+    public Department() {
+    }
+
+    public Department(String departmentName, String description) {
+        this.departmentName = departmentName;
+        this.description = description;
+    }
 
     public Integer getDepartmentId() {
         return departmentId;
