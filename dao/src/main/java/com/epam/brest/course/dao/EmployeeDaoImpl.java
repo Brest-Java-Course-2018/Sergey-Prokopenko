@@ -23,11 +23,11 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
     String insert = "INSERT INTO employee (employeeName, salary, departmentId) VALUES (:employeeName, :salary, :departmentId)";
 
-    String selectById = "SELECT * FROM employee WHERE employeeId = :employeeId";
+    String selectById = "SELECT employeeId, employeeName, salary, departmentId FROM employee WHERE employeeId = :employeeId";
 
     String update = "UPDATE employee SET employeeName = :employeeName, salary = :salary, departmentId = :departmentId WHERE employeeId = :employeeId";
 
-    String delete = "DELETE FROM employee WHERE employeeId = ?";
+    String delete = "DELETE FROM employee WHERE employeeId = :employeeId";
 
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -62,15 +62,15 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
     @Override
     public Employee getEmployeeById(Integer employeeId) {
-        SqlParameterSource namedParameter = new MapSqlParameterSource("employeeId", employeeId);
-        Employee employee =
-                namedParameterJdbcTemplate.
-                        queryForObject(selectById,
-                        namedParameter,
-                        BeanPropertyRowMapper.
-                        newInstance(Employee.class));
 
+        SqlParameterSource namedParameters =
+                new MapSqlParameterSource("employeeId", employeeId);
+        Employee employee =
+                namedParameterJdbcTemplate.queryForObject(selectById,
+                        namedParameters,
+                        BeanPropertyRowMapper.newInstance(Employee.class));
         return employee;
+
     }
 
     @Override

@@ -72,7 +72,9 @@ public class DepartmentDaoImpl implements DepartmentDao {
         SqlParameterSource namedParameters =
                 new MapSqlParameterSource(DEPARTMENT_ID, departmentId);
         Department department =
-                namedParameterJdbcTemplate.queryForObject(selectById, namedParameters, BeanPropertyRowMapper.newInstance(Department.class));
+                namedParameterJdbcTemplate.queryForObject(selectById,
+                        namedParameters,
+                        BeanPropertyRowMapper.newInstance(Department.class));
 
         return department;
     }
