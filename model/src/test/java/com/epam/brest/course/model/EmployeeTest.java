@@ -15,4 +15,5 @@ public class EmployeeTest {
         Assert.assertTrue(employee.getEmployeeName().equals(VASIA));
         Assert.assertEquals(VASIA, employee.getEmployeeName());
     }
+
 }

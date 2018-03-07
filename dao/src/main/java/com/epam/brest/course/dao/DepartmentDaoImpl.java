@@ -43,8 +43,6 @@ public class DepartmentDaoImpl implements DepartmentDao {
     @Value("${department.checkDepartment}")
     private String checkDepartment;
 
-
-
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {

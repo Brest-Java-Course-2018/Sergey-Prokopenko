@@ -4,10 +4,30 @@ package com.epam.brest.course.model;
  * POJO employee for model.
  */
 public class Employee {
+
     private Integer employeeId;
+
     private String employeeName;
+
     private Integer salary;
+
     private Integer departmentId;
+
+    public Employee(String employeeName, Integer salary, Integer departmentId) {
+        this.employeeName = employeeName;
+        this.salary = salary;
+        this.departmentId = departmentId;
+    }
+
+    public Employee(Integer employeeId, String employeeName, Integer salary, Integer departmentId) {
+        this.employeeId = employeeId;
+        this.employeeName = employeeName;
+        this.salary = salary;
+        this.departmentId = departmentId;
+    }
+
+    public Employee() {
+    }
 
     /**
      * Get Employee Id.
