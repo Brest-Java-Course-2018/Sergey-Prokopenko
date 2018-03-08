@@ -5,11 +5,14 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean id="departmentDao" class="org.easymock.EasyMock" factory-method="createMock">
+    <bean id="departmentDao"
+          class="org.easymock.EasyMock"
+          factory-method="createMock">
       <constructor-arg value="com.epam.brest.course.dao.DepartmentDao"/>
     </bean>
 
-    <bean id="departmentService" class="com.epam.brest.course.service.DepartmentServiceImpl">
+    <bean id="departmentService"
+          class="com.epam.brest.course.service.DepartmentServiceImpl">
         <constructor-arg ref="departmentDao"/>
     </bean>
 

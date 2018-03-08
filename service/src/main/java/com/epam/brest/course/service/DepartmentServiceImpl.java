@@ -2,13 +2,12 @@ package com.epam.brest.course.service;
 
 import com.epam.brest.course.dao.DepartmentDao;
 import com.epam.brest.course.model.Department;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class DepartmentServiceImpl implements DepartmentService{
 
-    private static final Logger LOGGER =  org.apache.logging.log4j.LogManager.getLogger();
-
+    private static final Logger LOGGER =  LogManager.getLogger();
 
     private DepartmentDao departmentDao;
 

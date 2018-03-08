@@ -57,7 +57,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public List<Department> getDepartments() {
-        LOGGER.debug("getDepatments()");
+        LOGGER.debug("getDepartments()");
         List<Department> departments = namedParameterJdbcTemplate.getJdbcOperations().query(departmentSelect, new DepartmentRowMapper());
         return departments;
     }
@@ -90,6 +90,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     @Override
     public Department addDepartment(Department department) {
 
+        LOGGER.debug("addDepartment({})", department);
         MapSqlParameterSource namedParameters =
                 new MapSqlParameterSource(DEPARTMENT_NAME,department.getDepartmentName());
 
@@ -117,6 +118,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public void updateDepartment(Department department) {
+        LOGGER.debug("updateDepartment({})", department);
         SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(department);
         namedParameterJdbcTemplate.update(update, namedParameters);
     }
@@ -124,6 +126,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     @Override
     public void deleteDepartmentById(Integer departmentId)
     {
+        LOGGER.debug("deleteDepartmentById({})", departmentId);
         namedParameterJdbcTemplate.getJdbcOperations().update(delete, departmentId);
     }
 
