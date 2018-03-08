@@ -12,5 +12,6 @@ Epam course
     $mvn site:stage  
     check: ``<project>/target/stage/index.html``
 
-mvn cobertura:cobertura -- % coverage of tests
-checkstyle:check
+mvn cobertura:cobertura -- coverage of tests
+
+mvn checkstyle:check
