@@ -1,9 +1,8 @@
 package com.epam.brest.course.dao;
 
-import com.epam.brest.course.model.Department;
 import com.epam.brest.course.model.Employee;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -11,37 +10,66 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
-public class EmployeeDaoImpl implements EmployeeDao{
+/**
+ * Implementation of EmployeeDao.
+ */
+public class EmployeeDaoImpl implements EmployeeDao {
 
-    String select = "SELECT employeeId, employeeName, salary, departmentId FROM employee";
+    /**
+     * SQL query select all employees.
+     */
+    @Value("${employee.select}")
+    private String select;
 
-    String selectEmployees = "SELECT employeeId, employeeName, salary, departmentId FROM employee WHERE departmentId = ?";
+    /**
+     * SQL query select employees by department.
+     */
+    @Value("${employee.selectEmployees}")
+    private String selectEmployees;
 
-    String insert = "INSERT INTO employee (employeeName, salary, departmentId) VALUES (:employeeName, :salary, :departmentId)";
+    /**
+     * SQL query add employee.
+     */
+    @Value("${employee.insert}")
+    private String insert;
 
-    String selectById = "SELECT employeeId, employeeName, salary, departmentId FROM employee WHERE employeeId = :employeeId";
+    /**
+     * SQL query select employee by ID.
+     */
+    @Value("${employee.selectById}")
+    private String selectById;
 
-    String update = "UPDATE employee SET employeeName = :employeeName, salary = :salary, departmentId = :departmentId WHERE employeeId = :employeeId";
+    /**
+     * SQL query edit employee by ID.
+     */
+    @Value("${employee.update}")
+    private String update;
 
-    String delete = "DELETE FROM employee WHERE employeeId = ?";
+    /**
+     * SQL query delete employee by ID.
+     */
+    @Value("${employee.delete}")
+    private String delete;
 
+    /**
+     * setNamedParameterJdbcTemplate variable.
+     */
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+    /**
+     * Setter for setNamedParameterJdbcTemplate.
+     * @param namedParameterJdbcTemplate - variable.
+     */
+    public final void setNamedParameterJdbcTemplate(
+            final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-
     @Override
-    public List<Employee> getEmployeesByDepartmentId(Integer departmentId)
-    {
-        SqlParameterSource namedParameters =
-                new MapSqlParameterSource("departmentId", departmentId);
-
+    public final List<Employee>
+    getEmployeesByDepartmentId(final Integer departmentId) {
         List<Employee> employees =
                         namedParameterJdbcTemplate.
                         getJdbcOperations().
@@ -52,16 +80,16 @@ public class EmployeeDaoImpl implements EmployeeDao{
     }
 
     @Override
-    public List<Employee> getEmployees() {
+    public final List<Employee> getEmployees() {
 
         List<Employee> employees = namedParameterJdbcTemplate.
-                getJdbcOperations().
-                query(select, BeanPropertyRowMapper.newInstance(Employee.class));
+                                getJdbcOperations().
+                                query(select, BeanPropertyRowMapper.newInstance(Employee.class));
         return employees;
     }
 
     @Override
-    public Employee getEmployeeById(Integer employeeId) {
+    public final Employee getEmployeeById(final Integer employeeId) {
 
         SqlParameterSource namedParameters =
                 new MapSqlParameterSource("employeeId", employeeId);
@@ -73,7 +101,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
     }
 
     @Override
-    public Employee addEmployee(Employee employee) {
+    public final Employee addEmployee(final Employee employee) {
 
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
 
@@ -90,13 +118,14 @@ public class EmployeeDaoImpl implements EmployeeDao{
     }
 
     @Override
-    public void updateEmployee(Employee employee) {
-        SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(employee);
+    public final void updateEmployee(final Employee employee) {
+        SqlParameterSource namedParameters =
+                new BeanPropertySqlParameterSource(employee);
         namedParameterJdbcTemplate.update(update, namedParameters);
     }
 
     @Override
-    public void deleteEmployeeById(Integer employeeId) {
+    public final void deleteEmployeeById(final Integer employeeId) {
         namedParameterJdbcTemplate.getJdbcOperations().update(delete, employeeId);
     }
 

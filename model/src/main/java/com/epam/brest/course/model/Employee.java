@@ -5,27 +5,60 @@ package com.epam.brest.course.model;
  */
 public class Employee {
 
+    /**
+     * Id of employee.
+     */
     private Integer employeeId;
 
+    /**
+     * Name of employee.
+     */
     private String employeeName;
 
+    /**
+     * Salary of employee.
+     */
     private Integer salary;
 
+    /**
+     * Id of department.
+     */
     private Integer departmentId;
 
-    public Employee(String employeeName, Integer salary, Integer departmentId) {
+    /**
+     * Constructor with arguments.
+     * @param employeeName - Employee name.
+     * @param salary - Salary of employee.
+     * @param departmentId - Department ID.
+     */
+    public Employee(final String employeeName,
+                    final Integer salary,
+                    final Integer departmentId) {
         this.employeeName = employeeName;
         this.salary = salary;
         this.departmentId = departmentId;
     }
 
-    public Employee(Integer employeeId, String employeeName, Integer salary, Integer departmentId) {
+    /**
+     * Constructor with all fields.
+     * @param employeeId - ID of employee.
+     * @param employeeName - Employee name.
+     * @param salary - Salary of employee.
+     * @param departmentId - Department ID.
+     */
+    public Employee(final Integer employeeId,
+                    final String employeeName,
+                    final Integer salary,
+                    final Integer departmentId) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.salary = salary;
         this.departmentId = departmentId;
     }
 
+    /**
+     * Default constructor.
+     */
     public Employee() {
     }
 
@@ -33,45 +66,77 @@ public class Employee {
      * Get Employee Id.
      * @return employeeId.
      */
-    public Integer getEmployeeId() {
+    public final Integer getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(Integer employeeId) {
+    /**
+     * Setter for Employee Id.
+     * @param employeeId - Employee Id.
+     */
+    public final void setEmployeeId(final Integer employeeId) {
         this.employeeId = employeeId;
     }
 
-    public String getEmployeeName() {
+    /**
+     * Getter for Employee name.
+     * @return employeeName.
+     */
+    public final String getEmployeeName() {
         return employeeName;
     }
 
-    public void setEmployeeName(String employeeName) {
+    /**
+     * Setter for Employee name.
+     * @param employeeName - Employee name.
+     */
+    public final void setEmployeeName(final String employeeName) {
         this.employeeName = employeeName;
     }
 
-    public Integer getSalary() {
+    /**
+     * Getter for salary.
+     * @return salary.
+     */
+    public final Integer getSalary() {
         return salary;
     }
 
-    public void setSalary(Integer salary) {
+    /**
+     * Setter for salary.
+     * @param salary - salary.
+     */
+    public final void setSalary(final Integer salary) {
         this.salary = salary;
     }
 
-    public Integer getDepartmentId() {
+    /**
+     * Getter for department ID.
+     * @return departmentId.
+     */
+    public final Integer getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(Integer departmentId) {
+    /**
+     * Setter for department ID.
+     * @param departmentId - department ID.
+     */
+    public final void setDepartmentId(final Integer departmentId) {
         this.departmentId = departmentId;
     }
 
+    /**
+     * String representation.
+     * @return string representation of employee object.
+     */
     @Override
-    public String toString() {
-        return "Employee{" +
-                "employeeId=" + employeeId +
-                ", employeeName='" + employeeName + '\'' +
-                ", salary=" + salary +
-                ", departmentId=" + departmentId +
-                '}';
+    public final String toString() {
+        return "Employee{"
+                + "employeeId=" + employeeId
+                + ", employeeName='" + employeeName + '\''
+                + ", salary=" + salary
+                + ", departmentId=" + departmentId
+                + '}';
     }
 }

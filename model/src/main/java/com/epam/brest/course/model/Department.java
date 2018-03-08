@@ -6,50 +6,95 @@ package com.epam.brest.course.model;
 
 public class Department {
 
+    /**
+     * Id of department.
+     */
     private Integer departmentId;
 
+    /**
+     * Name of department.
+     */
     private String departmentName;
 
+    /**
+     * Description of department.
+     */
     private String description;
 
+    /**
+     * Default constructor.
+     */
     public Department() {
     }
 
-    public Department(String departmentName, String description) {
+    /**
+     * Constructor with fields.
+     * @param departmentName - Name of department.
+     * @param description - Description of department.
+     */
+    public Department(final String departmentName, final String description) {
         this.departmentName = departmentName;
         this.description = description;
     }
 
-    public Integer getDepartmentId() {
+    /**
+     * Getter for Department ID.
+     * @return departmentId
+     */
+    public final Integer getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(Integer departmentId) {
+    /**
+     * Setter for Department ID.
+     * @param departmentId - Department ID.
+     */
+    public final void setDepartmentId(final Integer departmentId) {
         this.departmentId = departmentId;
     }
 
-    public String getDepartmentName() {
+    /**
+     * Getter for Department Name.
+     * @return departmentName
+     */
+    public final String getDepartmentName() {
         return departmentName;
     }
 
-    public void setDepartmentName(String departmentName) {
+    /**
+     * Setter for Department Name.
+     * @param departmentName - Department Name.
+     */
+    public final void setDepartmentName(final String departmentName) {
         this.departmentName = departmentName;
     }
 
-    public String getDescription() {
+    /**
+     * Getter for Description department.
+     * @return description
+     */
+    public final String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    /**
+     * Setter for Description department.
+     * @param description - Description department.
+     */
+    public final void setDescription(final String description) {
         this.description = description;
     }
 
+    /**
+     * String representation.
+     * @return string representation of employee object.
+     */
     @Override
-    public String toString() {
-        return "Department{" +
-                "departmentId=" + departmentId +
-                ", departmentName='" + departmentName + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+    public final String toString() {
+        return "Department{"
+                + "departmentId=" + departmentId
+                + ", departmentName='" + departmentName + '\''
+                + ", description='" + description + '\''
+                + '}';
     }
 }
