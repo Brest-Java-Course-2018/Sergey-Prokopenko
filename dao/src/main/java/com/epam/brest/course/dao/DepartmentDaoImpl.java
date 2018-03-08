@@ -1,9 +1,9 @@
 package com.epam.brest.course.dao;
 
 import com.epam.brest.course.model.Department;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -12,12 +12,14 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.LogManager;
 
 public class DepartmentDaoImpl implements DepartmentDao {
+
+    private static final Logger LOGGER =  org.apache.logging.log4j.LogManager.getLogger();
 
     public static final String DEPARTMENT_ID = "departmentId";
 
@@ -49,8 +51,13 @@ public class DepartmentDaoImpl implements DepartmentDao {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
+    public DepartmentDaoImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    }
+
     @Override
     public List<Department> getDepartments() {
+        LOGGER.debug("getDepatments()");
         List<Department> departments = namedParameterJdbcTemplate.getJdbcOperations().query(departmentSelect, new DepartmentRowMapper());
         return departments;
     }
@@ -69,6 +76,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public Department getDepartmentById(Integer departmentId) {
+        LOGGER.debug("getDepartmentById({})", departmentId);
         SqlParameterSource namedParameters =
                 new MapSqlParameterSource(DEPARTMENT_ID, departmentId);
         Department department =
@@ -88,6 +96,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         Integer result =
                 namedParameterJdbcTemplate.queryForObject(checkDepartment, namedParameters, Integer.class);
 
+        LOGGER.debug("result({})", result);
         if(result == 0)
         {
             namedParameters = new MapSqlParameterSource();

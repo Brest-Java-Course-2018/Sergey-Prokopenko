@@ -1,6 +1,5 @@
 package com.epam.brest.course.dao;
 
-
 import com.epam.brest.course.model.Employee;
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,7 +19,7 @@ import java.util.List;
         "classpath:dao.xml"})
 
 @Rollback
-@Transactional
+@Transactional(transactionManager = "transactionManager")
 public class EmployeeDaoImplTest {
 
     @Autowired
@@ -29,20 +28,23 @@ public class EmployeeDaoImplTest {
     @Test
     public void getEmployees() {
         List<Employee> employees = employeeDao.getEmployees();
-        Assert.assertTrue(employees.isEmpty());
+        Assert.assertFalse(employees.isEmpty());
     }
 
     @Test
     public void getEmployeesByDepartmentId() {
 
+        List<Employee> employeesBefore = employeeDao.getEmployeesByDepartmentId(1);
+
         Employee employee = new Employee("Test1", 500, 1);
         employeeDao.addEmployee(employee);
+
         Employee employee1 = new Employee("Test2", 600, 1);
         employeeDao.addEmployee(employee1);
 
-        List<Employee> employees = employeeDao.getEmployees();
-        Assert.assertFalse(employees.isEmpty());
-        Assert.assertTrue(employees.size() == 2);
+        List<Employee> employeesAfter = employeeDao.getEmployeesByDepartmentId(1);
+        Assert.assertFalse(employeesAfter.isEmpty());
+        Assert.assertTrue(employeesAfter.size() == (employeesBefore.size() + 2));
     }
 
     @Test
@@ -50,7 +52,8 @@ public class EmployeeDaoImplTest {
         List<Employee> employees = employeeDao.getEmployees();
         int before = employees.size();
 
-        Employee employee = new Employee(3,"Petr", 900, 1);
+        Employee employee = new Employee("Petr", 900, 1);
+
         Employee newEmployee = employeeDao.addEmployee(employee);
         Assert.assertNotNull(newEmployee.getEmployeeId());
 
@@ -64,14 +67,13 @@ public class EmployeeDaoImplTest {
     @Test
     public void getEmployeeById() {
 
-        Employee employee = new Employee(1,"Ivan", 1500, 1);
+        Employee employee = new Employee("Nikolay", 1500, 1);
         employee = employeeDao.addEmployee(employee);
 
         List<Employee> employees = employeeDao.getEmployees();
         int size = employees.size();
 
         Employee newEmployee = employeeDao.getEmployeeById(employee.getEmployeeId());
-        Assert.assertNotNull(employeeDao);
         Assert.assertTrue(newEmployee.getEmployeeId().equals(employee.getEmployeeId()));
         Assert.assertTrue(newEmployee.getEmployeeName().equals(employee.getEmployeeName()));
         Assert.assertTrue(newEmployee.getSalary().equals(employee.getSalary()));
@@ -81,7 +83,7 @@ public class EmployeeDaoImplTest {
     @Test
     public void updateEmployee() {
 
-        Employee newEmployee = employeeDao.addEmployee(new Employee(6,"Test Name", 500, 1));
+        Employee newEmployee = employeeDao.addEmployee(new Employee("Test Name", 500, 1));
 
         newEmployee.setEmployeeName("Vasya");
         newEmployee.setSalary(600);
@@ -96,11 +98,12 @@ public class EmployeeDaoImplTest {
 
     @Test
     public void deleteEmployeeById (){
-        Employee newEmployee = employeeDao.addEmployee(new Employee(7,"Test Name", 500, 1));
+        Employee newEmployee = new Employee("Ivan",  500, 1);
+        employeeDao.addEmployee(newEmployee);
         List<Employee> employees = employeeDao.getEmployees();
         int size = employees.size();
+        employeeDao.deleteEmployeeById(1);
 
-        employeeDao.deleteEmployeeById(newEmployee.getEmployeeId());
         Assert.assertTrue((size - 1) == employeeDao.getEmployees().size());
     }
 

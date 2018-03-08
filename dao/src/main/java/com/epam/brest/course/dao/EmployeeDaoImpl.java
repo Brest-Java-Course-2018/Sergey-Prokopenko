@@ -17,9 +17,9 @@ import java.util.List;
 
 public class EmployeeDaoImpl implements EmployeeDao{
 
-    String select = "SELECT employeeName, salary, departmentId FROM employee";
+    String select = "SELECT employeeId, employeeName, salary, departmentId FROM employee";
 
-    String selectEmployees = "SELECT employeeName, salary, departmentId FROM employee WHERE departmentId = ?";
+    String selectEmployees = "SELECT employeeId, employeeName, salary, departmentId FROM employee WHERE departmentId = ?";
 
     String insert = "INSERT INTO employee (employeeName, salary, departmentId) VALUES (:employeeName, :salary, :departmentId)";
 
@@ -27,7 +27,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
     String update = "UPDATE employee SET employeeName = :employeeName, salary = :salary, departmentId = :departmentId WHERE employeeId = :employeeId";
 
-    String delete = "DELETE FROM employee WHERE employeeId = :employeeId";
+    String delete = "DELETE FROM employee WHERE employeeId = ?";
 
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -70,13 +70,13 @@ public class EmployeeDaoImpl implements EmployeeDao{
                         namedParameters,
                         BeanPropertyRowMapper.newInstance(Employee.class));
         return employee;
-
     }
 
     @Override
     public Employee addEmployee(Employee employee) {
 
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+
         namedParameters.addValue("employeeName", employee.getEmployeeName());
         namedParameters.addValue("salary", employee.getSalary());
         namedParameters.addValue("departmentId", employee.getDepartmentId());
@@ -84,7 +84,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(insert, namedParameters, generatedKeyHolder);
 
-        employee.setDepartmentId(generatedKeyHolder.getKey().intValue());
+        employee.setEmployeeId(generatedKeyHolder.getKey().intValue());
 
         return employee;
     }
