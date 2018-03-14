@@ -6,7 +6,7 @@
     </Appenders>
     <Loggers>
         <Root level="ERROR">
-            <AppenderRef ref="Console"/>
+            <appender-ref ref="Console"/>
         </Root>
         <Logger name="com.epam" level="DEBUG"/>
         <Logger name="org.springframework" level="INFO"/>
