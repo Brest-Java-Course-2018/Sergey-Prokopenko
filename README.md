@@ -8,9 +8,11 @@ Epam course
 1. Check      
     $java -version      
     $export JAVA_HOME = ...    
-    $mvn -version    
+    $mvn -version
+    
 2. Build    
-    $mvn clean install    
+    $mvn clean install
+    
 3. Preparing repotrs  
     $mvn site  
     $mvn site:stage  
@@ -20,5 +22,5 @@ mvn cobertura:cobertura -- coverage of tests
 
 mvn checkstyle:check
 
-
+4. Travis CI integration https://travis-ci.org/Brest-Java-Course-2018/Sergey-Prokopenko/
 
