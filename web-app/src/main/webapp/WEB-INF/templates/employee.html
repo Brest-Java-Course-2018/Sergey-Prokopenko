@@ -20,7 +20,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <a href="departments.html" class="navbar-brand"><img th:src="@{/resources/static/img/if_group_171280.svg}"></a>
+    <a href="departments.html" class="navbar-brand"><img th:src="@{/resources/static/img/img.svg}"></a>
 
     <div class="collapse navbar-collapse" id="navbarsNav">
         <div class="navbar-nav">
@@ -37,12 +37,13 @@
 </nav>
 
 <header>
-    <nav class="navbar navbar-expand-sm navbar-light bg-light text-dark">
+    <nav class="py-1 mb-3 navbar navbar-expand-sm navbar-light bg-light text-dark">
         <a href="employees.html">
             <i class="fa fa-arrow-left"></i>
         </a>
-        <a href="employees.html" class="navbar-brand text-uppercase mr-auto">
-            Edit employee
+        <a th:href="@{/employees}"
+           class="navbar-brand text-uppercase mr-auto">
+           Edit employee
         </a>
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -51,7 +52,6 @@
                    data-toggle="tooltip"
                    data-placement="bottom"
                    title="Save">
-
                     <i class="fa fa-save"></i>
                     <span class="d-none d-sm-inline">Save</span>
                 </a>

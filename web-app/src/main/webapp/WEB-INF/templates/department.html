@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Department</title>
+    <title>Edit department</title>
     <link rel="stylesheet" th:href="@{/resources/static/css/font-awesome.min.css}">
     <link rel="stylesheet" th:href="@{/resources/static/css/bootstrap.css}">
     <link rel="stylesheet" th:href="@{/resources/static/css/style.css}">
@@ -18,63 +18,92 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <a href="departments.html" class="navbar-brand"><img th:src="@{/resources/static/img/if_group_171280.svg}"></a>
+    <a href="departments.html" class="navbar-brand"><img th:src="@{/resources/static/img/img.svg}"></a>
 
     <div class="collapse navbar-collapse" id="navbarsNav">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="departments.html">
-                Departments
-                <span class="sr-only">(current)</span>
-            </a>
-            <a class="nav-item nav-link" href="#">Employees</a>
+            <a class="nav-item nav-link" th:href="@{/departments}">Departments<span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" th:href="@{/employees}">Employees</a>
         </div>
     </div>
 </nav>
 <header>
-    <nav class="navbar navbar-expand-sm navbar-light bg-light text-dark">
-        <a href="departments.html">
-            <i class="fa fa-arrow-left"></i>
-        </a>
-        <a href="departments.html" class="navbar-brand text-uppercase mr-auto">
-            Edit department
-        </a>
-
+    <nav id="main-header" class="py-1 mb-3 navbar navbar-expand-sm navbar-light bg-light text-dark">
+        <ul class="navbar-nav float-lg-left">
+            <li class="nav-item"
+                title="Back to list"
+                data-toggle="tooltip"
+                data-placement="bottom">
+                <a th:href="@{/departments}"
+                   class="btn btn-light btn-block">
+                <i class="fa fa-arrow-left"></i></a>
+            </li>
+        </ul>
+        <span class="navbar-brand text-uppercase mr-auto"
+              th:text="${isNew} ? 'New department' : 'Edit department'">
+            Edit department</span>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a href="#"
+                <a href="departments.html"
+                   th:href="@{/department}"
+                   th:onclick="@{document.forms['departmentForm'].submit(); return false;}"
                    class="btn btn-light"
+                   title="Save department"
                    data-toggle="tooltip"
-                   data-placement="bottom"
-                   title="Save">
-
-                    <i class="fa fa-save"></i>
-                    <span class="d-none d-sm-inline">Save</span>
-                </a>
-            </li>
+                   data-placement="bottom">
+                    <i class="fa fa-save"></i> <span class="d-none d-sm-inline">Save</span></a></li>
         </ul>
     </nav>
 </header>
+
 <section id="department">
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <div class="card w-75">
+                <div class="card">
                     <div class="card-body">
+                        <form id="departmentForm"
+                              th:object="${department}"
+                              action="departments.html"
+                              th:action="@{${#httpServletRequest.servletPath}}"
+                              th:method="@{post}">
 
-                        <form>
-                            <div class="form-group">
-                                <label class="d-none d-sm-inline" for="deptNameInput">Department name</label>
-                                <input type="text"
-                                       class="form-control"
-                                       id="deptNameInput"
-                                       placeholder="CEO">
+                            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                                <p>Please fix errors below:</p>
                             </div>
+
+                            <input id="field_departmentId"
+                                   name="field_departmentId"
+                                   type="hidden"
+                                   th:field="*{departmentId}"/>
+
+                            <div class="form-group"
+                                 th:class="${#fields.hasErrors('departmentName')} ? 'form-group has-error' : 'form-group'">
+                                <label class="form-control-label"
+                                       for="field_departmentName">Department Name</label>
+                                <input class="form-control "
+                                       id="field_departmentName"
+                                       name="field_departmentName"
+                                       type="text"
+                                       value="CEO"
+                                       th:field="*{departmentName}"/>
+                                <div class="form-text text-danger"
+                                     th:if="${#fields.hasErrors('departmentName')}"
+                                     th:errors="*{departmentName}">[errors]</div>
+                            </div>
+
                             <div class="form-group">
-                                <label class="d-none d-sm-inline" for="deptDescrInput">Description</label>
-                                <input type="text"
-                                       class="form-control"
-                                       id="deptDescrInput"
-                                       placeholder="CEO department">
+                                <label class="form-control-label"
+                                       for="field_description">Description</label>
+                                <input class="form-control"
+                                       id="field_description"
+                                       name="field_description"
+                                       type="text"
+                                       value="CEO department"
+                                       th:field="*{description}"/>
+                                <div class="form-text text-danger"
+                                     th:if="${#fields.hasErrors('description')}"
+                                     th:errors="*{description}">[errors]</div>
                             </div>
                         </form>
                     </div>
@@ -84,9 +113,13 @@
     </div>
 </section>
 
-<script th:src="@{/resources/static/js/jquery.min.js}"></script>
-<script th:src="@{/resources/static/js/popper.min.js}"></script>
-<script th:src="@{/resources/static/js/bootstrap.min.js}"></script>
+
+<script src="../../resources/static/js/jquery.min.js"
+        th:src="@{/resources/static/js/jquery.min.js}"></script>
+<script src="../../resources/static/js/popper.min.js"
+        th:src="@{/resources/static/js/popper.min.js}"></script>
+<script src="../../resources/static/js/bootstrap.min.js"
+        th:src="@{/resources/static/js/bootstrap.min.js}"></script>
 <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()

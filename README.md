@@ -1,4 +1,3 @@
-
 # Sergey-Prokopenko
 Epam course
 
@@ -20,3 +19,4 @@ mvn checkstyle:check
 [![Build Status](https://travis-ci.org/Brest-Java-Course-2018/Sergey-Prokopenko.svg?branch=master)](https://travis-ci.org/Brest-Java-Course-2018/Sergey-Prokopenko)
 
 [![Coverage Status](https://coveralls.io/repos/github/Brest-Java-Course-2018/Sergey-Prokopenko/badge.svg)](https://coveralls.io/github/Brest-Java-Course-2018/Sergey-Prokopenko)
+

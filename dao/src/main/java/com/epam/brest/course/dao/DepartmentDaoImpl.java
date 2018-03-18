@@ -1,5 +1,6 @@
 package com.epam.brest.course.dao;
 
+import com.epam.brest.course.dto.DepartmentDTO;
 import com.epam.brest.course.model.Department;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,6 +48,9 @@ public class DepartmentDaoImpl implements DepartmentDao {
      */
     @Value("${department.select}")
     private String departmentSelect;
+
+    @Value("${department.selectDepartmentsDTO}")
+    private String selectDepartmentsDTO;
 
     /**
      * SQL query select department by ID.
@@ -111,6 +115,16 @@ public class DepartmentDaoImpl implements DepartmentDao {
         return departments;
     }
 
+    @Override
+    public List<DepartmentDTO> getDepartmentsDTO() {
+        LOGGER.debug("getDepartmentsDTO()");
+        List<DepartmentDTO> departments =
+                        namedParameterJdbcTemplate.
+                        getJdbcOperations().
+                        query(selectDepartmentsDTO, new DepartmentDTORowMapper());
+        return departments;
+    }
+
     /*@Override
     public Department getDepartmentById(Integer departmentId) {
         SqlParameterSource namedParameters =
@@ -158,6 +172,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
                     namedParameters, generatedKeyHolder);
 
             department.setDepartmentId(generatedKeyHolder.getKey().intValue());
+
         } else {
             throw new IllegalArgumentException
                     ("Department with the same name already exists in Database!");
@@ -187,6 +202,20 @@ public class DepartmentDaoImpl implements DepartmentDao {
             department.setDepartmentId(resultSet.getInt(DEPARTMENT_ID));
             department.setDepartmentName(resultSet.getString(DEPARTMENT_NAME));
             department.setDescription(resultSet.getString(DESCRIPTION));
+
+            return department;
+        }
+    }
+
+    private class DepartmentDTORowMapper implements RowMapper<DepartmentDTO> {
+
+        @Override
+        public DepartmentDTO mapRow(ResultSet resultSet, int i) throws SQLException {
+
+            DepartmentDTO department = new DepartmentDTO();
+            department.setDepartmentId(resultSet.getInt(DEPARTMENT_ID));
+            department.setDepartmentName(resultSet.getString(DEPARTMENT_NAME));
+            department.setAvgSalary(resultSet.getInt("avgSalary"));
 
             return department;
         }

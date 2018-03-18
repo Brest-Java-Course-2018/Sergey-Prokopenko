@@ -1,10 +1,9 @@
 package com.epam.brest.course.dao;
 
+import com.epam.brest.course.dto.DepartmentDTO;
 import com.epam.brest.course.model.Department;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -16,10 +15,7 @@ import java.util.List;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:test-db-spring.xml",
-        "classpath:test-dao.xml",
-        "classpath:dao.xml"})
-
+@ContextConfiguration(locations = {"classpath:test-db-spring.xml", "classpath:test-dao.xml", "classpath:dao.xml"})
 @Rollback
 @Transactional
 public class DepartmentDaoImplTest {
@@ -31,6 +27,13 @@ public class DepartmentDaoImplTest {
     public void getDepartments()
     {
         List<Department> departments = departmentDao.getDepartments();
+        Assert.assertFalse(departments.isEmpty());
+    }
+
+    @Test
+    public void getDepartmentsDTO()
+    {
+        List<DepartmentDTO> departments = departmentDao.getDepartmentsDTO();
         Assert.assertFalse(departments.isEmpty());
     }
 
@@ -57,7 +60,7 @@ public class DepartmentDaoImplTest {
 
         Assert.assertTrue(newDepartment.getDepartmentName().equals(department.getDepartmentName()));
         Assert.assertTrue(newDepartment.getDescription().equals(department.getDescription()));
-
+        departments = departmentDao.getDepartments();
         Assert.assertTrue((sizeBefore + 1) ==  departmentDao.getDepartments().size());
     }
 

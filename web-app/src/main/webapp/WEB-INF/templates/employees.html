@@ -20,18 +20,17 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <a href="departments.html" class="navbar-brand"><img th:src="@{/resources/static/img/if_group_171280.svg}"></a>
+    <a href="departments.html" class="navbar-brand"><img th:src="@{/resources/static/img/img.svg}"></a>
 
     <div class="collapse navbar-collapse" id="navbarsNav">
         <div class="navbar-nav">
-            <a class="nav-item nav-link" href="departments.html">Departments</a>
-            <a class="nav-item nav-link active" href="employees.html">Employees <span
-                    class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" th:href="@{/departments}">Departments</a>
+            <a class="nav-item nav-link active" th:href="@{/employees}">Employees<span class="sr-only">(current)</span></a>
         </div>
     </div>
 </nav>
 <header>
-    <nav class="navbar navbar-expand-sm navbar-light bg-light text-dark">
+    <nav class="py-1 mb-3 navbar navbar-expand-sm navbar-light bg-light text-dark">
         <a href="employees.html" class="navbar-brand text-uppercase mr-auto">
             Employees
         </a>
@@ -60,6 +59,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Salary</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -88,7 +88,7 @@
                             </span>
                         </td>
                     </tr>
-                    <tr>
+                    <tr th:remove="all">
                         <td>Petr Petrov</td>
                         <td>petr.petrov</td>
                         <td>1200</td>

@@ -10,9 +10,5 @@
                 <value>classpath:sql.properties</value>
             </list>
         </property>
-
     </bean>
-
-
-
 </beans>

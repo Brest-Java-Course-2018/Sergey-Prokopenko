@@ -17,7 +17,6 @@
         <module>service</module>
         <module>test-db</module>
         <module>web-app</module>
-
     </modules>
 
     <distributionManagement>
@@ -47,11 +46,16 @@
                 <artifactId>dao</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>com.epam.brest.course</groupId>
-                <artifactId>test-db</artifactId>
+                <artifactId>service</artifactId>
                 <version>${project.version}</version>
-                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.brest.course</groupId>
+                <artifactId>web-app</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -92,6 +96,14 @@
                 <artifactId>spring-test</artifactId>
                 <version>${spring.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.epam.brest.course</groupId>
+                <artifactId>test-db</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+            </dependency>
+
             <dependency>
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>

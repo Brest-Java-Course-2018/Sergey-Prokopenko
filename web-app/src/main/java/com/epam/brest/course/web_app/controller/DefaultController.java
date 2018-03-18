@@ -8,7 +8,8 @@ public class DefaultController {
 
     @GetMapping(value = "/")
     public final String defaultPageRedirect() {
-        return "departments";
+        return "redirect:departments";
     }
+
 
 }

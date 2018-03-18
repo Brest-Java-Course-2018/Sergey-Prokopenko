@@ -14,10 +14,7 @@ import java.util.List;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:test-db-spring.xml",
-        "classpath:test-dao.xml",
-        "classpath:dao.xml"})
-
+@ContextConfiguration(locations = {"classpath:test-db-spring.xml", "classpath:test-dao.xml", "classpath:dao.xml"})
 @Rollback
 @Transactional(transactionManager = "transactionManager")
 public class EmployeeDaoImplTest {
@@ -97,7 +94,7 @@ public class EmployeeDaoImplTest {
     }
 
     @Test
-    public void deleteEmployeeById (){
+    public void deleteEmployeeById() {
         Employee newEmployee = new Employee("Ivan",  500, 1);
         employeeDao.addEmployee(newEmployee);
         List<Employee> employees = employeeDao.getEmployees();

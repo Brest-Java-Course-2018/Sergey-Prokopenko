@@ -1,5 +1,6 @@
 package com.epam.brest.course.dao;
 
+import com.epam.brest.course.dto.DepartmentDTO;
 import com.epam.brest.course.model.Department;
 
 import java.util.List;
@@ -14,6 +15,13 @@ public interface DepartmentDao {
      * @return list of departments.
      */
     List<Department> getDepartments();
+
+
+    /**
+     * Get DTO list.
+     * @return list of departments.
+     */
+    List<DepartmentDTO> getDepartmentsDTO();
 
     /**
      * Get department by ID.
