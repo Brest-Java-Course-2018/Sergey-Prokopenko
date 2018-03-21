@@ -38,6 +38,11 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
+    public List<Department> getDepartments() {
+        return departmentDao.getDepartments();
+    }
+
+    @Override
     public List<DepartmentDTO> getDepartmentsDTO() {
         List<DepartmentDTO> list = departmentDao.getDepartmentsDTO();
         return list;

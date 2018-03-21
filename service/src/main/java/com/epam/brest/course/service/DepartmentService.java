@@ -27,7 +27,7 @@ public interface DepartmentService {
 
     void updateDepartment(Department department);
 
-    //List<Department> getDepartments();
+    List<Department> getDepartments();
 
     List<DepartmentDTO> getDepartmentsDTO();
 
