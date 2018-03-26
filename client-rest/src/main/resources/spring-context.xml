@@ -19,13 +19,20 @@
     </bean>
 
     <context:annotation-config/>
+
     <context:component-scan base-package="com.epam.brest.course.client"/>
 
+    <bean id="customResponceErrorHandler" class="com.epam.brest.course.client.rest.CustomResponceErrorHandler">
 
+    </bean>
 
-    <bean id="restTemplate" class="org.easymock.EasyMock" factory-method="createMock">
-        <constructor-arg value="org.springframework.web.client.RestTemplate"/>
-
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            </list>
+        </property>
+        <property name="errorHandler" ref="customResponceErrorHandler"/>
     </bean>
 
     <bean id="departmentService" class="com.epam.brest.course.client.rest.DepartmentConsumerRest">

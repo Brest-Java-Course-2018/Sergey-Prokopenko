@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <parent>
         <artifactId>sampleuserapp</artifactId>
         <groupId>com.epam.brest.course</groupId>
@@ -12,7 +13,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>client-rest</artifactId>
-    <packaging>war</packaging>
 
     <dependencies>
         <dependency>
@@ -62,6 +62,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
